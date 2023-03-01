@@ -36,12 +36,11 @@ int main() {
     // }
     // Generate 32 random bytes
     unsigned char random_bytes[32];
-    unsigned char converted[32];
+    unsigned char converted[355];
     if (RAND_bytes(random_bytes, sizeof(random_bytes)) != 1) {
         fprintf(stderr, "Failed to generate random bytes\n");
         return 1;
     }
-
     printf("original  %s\n",random_bytes);   
     encode_base64(random_bytes,sizeof(random_bytes),converted);
     printf("converted  %s\n",converted);

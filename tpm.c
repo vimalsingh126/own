@@ -1,10 +1,10 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 #include <tss2/tss2_sys.h>
-#include <tss2/tss2_mu.h>
 
-#define NV_INDEX 0x1500016   // Replace with your own NV index value
-#define AUTH_VALUE "password"  // Replace with your own authorization value
+#define NV_INDEX 0x1500016 // Replace with your own NV index value
+#define AUTH_VALUE "password" // Replace with your own authorization value
 
 int main() {
     TSS2_RC rc;
@@ -14,13 +14,13 @@ int main() {
     BYTE *nv_data;
     TPMS_AUTH_COMMAND auth_command = {
         .sessionHandle = TPM2_RS_PW,
-        .nonce = TPM2B_EMPTY_INIT,
-        .hmac = TPM2B_EMPTY_INIT,
+        .nonce = {0},
+        .hmac = {0},
         .sessionAttributes = 0
     };
 
     // Initialize the TPM2 context
-    rc = Tss2_Sys_Initialize(&sapi_context, NULL,NULL);
+    rc = Tss2_Sys_Initialize(&sapi_context,sizeof(sapi_context), NULL,NULL);
     if (rc != TPM2_RC_SUCCESS) {
         printf("Error: Failed to initialize SAPI context.\n");
         exit(1);
@@ -33,18 +33,20 @@ int main() {
         exit(1);
     }
 
-    // Read the NV index data
-    rc = Tss2_Sys_NV_Read(sapi_context, TPM2_RH_OWNER, nv_handle, &auth_command, 0, sizeof(UINT16), &data_size, NULL, NULL);
+    // Read the NV index data size
+    rc = Tss2_Sys_NV_Read(sapi_context, TPM2_RH_OWNER, nv_handle, &auth_command, 0, sizeof(UINT16), &data_size, NULL);
     if (rc != TPM2_RC_SUCCESS) {
         printf("Error: Failed to read NV index data size.\n");
         exit(1);
     }
+
+    // Read the NV index data
     nv_data = (BYTE*)malloc(data_size);
     if (nv_data == NULL) {
         printf("Error: Failed to allocate memory for NV index data.\n");
         exit(1);
     }
-    rc = Tss2_Sys_NV_Read(sapi_context, TPM2_RH_OWNER, nv_handle, &auth_command, 0, data_size, &data_size, nv_data, NULL);
+    rc = Tss2_Sys_NV_Read(sapi_context, TPM2_RH_OWNER, nv_handle, &auth_command, 0, data_size, &data_size, nv_data);
     if (rc != TPM2_RC_SUCCESS) {
         printf("Error: Failed to read NV index data.\n");
         free(nv_data);
