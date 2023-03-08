@@ -45,6 +45,18 @@ $(BINDIR)/%.o: $(SRCDIR)/%.c
 
 clean:
 	rm -f $(OBJECTS) $(EXECUTABLE)
+	
+	
+	
+	    AddressSanitizer (ASan): a tool built into the Clang and GCC compilers that detects memory errors at runtime, including use-after-free, buffer overflow, and memory leak.
+
+    Electric Fence (EFence): a library that can be linked with C programs to detect memory errors such as buffer overflows, out-of-bounds reads and writes, and use-after-free.
+
+    Purify: a commercial tool that can detect memory leaks, buffer overflows, and other memory-related errors in C and C++ programs.
+
+    Memcheck: a tool included in the Valgrind suite that detects memory leaks, uninitialized memory reads, and other memory errors.
+
+    LeakSanitizer (LSan): a tool built into the Clang and GCC compilers that detects memory leaks at runtime, similar to ASan.
 
 
 
