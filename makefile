@@ -54,6 +54,6 @@ clean:
 
 
 
-
+sudo valgrind --leak-check=full --show-leak-kinds=all --log-file=memcheck.log ./nvreadsudo valgrind --leak-check=full --show-leak-kinds=all --log-file=memcheck.log ./nvread
 
 sudo valgrind --leak-check=full --log-file=memcheck.log ./nvread
