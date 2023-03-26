@@ -1,0 +1,28 @@
+The compilation process in C involves several stages, which can be summarized as follows:
+
+Preprocessing: In this stage, the preprocessor scans the source code and performs text substitutions, including the expansion of macros and the inclusion of header files. The preprocessed code is output to a new file with a .i extension.
+The command to run the preprocessor is cpp or gcc -E. For example, to preprocess the file example.c and save the output to example.i, you can use the command:
+
+Copy code
+gcc -E example.c -o example.i
+Compilation: In this stage, the compiler reads the preprocessed code and generates assembly code, which is platform-specific and usually stored in a file with a .s extension.
+The command to run the compiler is cc1 or gcc -S. For example, to compile the file example.i and save the output to example.s, you can use the command:
+
+Copy code
+gcc -S example.i -o example.s
+Assembly: In this stage, the assembler reads the assembly code and generates object code, which is binary code specific to the processor architecture. The object code is usually stored in a file with a .o extension.
+The command to run the assembler is as or gcc -c. For example, to assemble the file example.s and save the output to example.o, you can use the command:
+
+r
+Copy code
+gcc -c example.s -o example.o
+Linking: In this stage, the linker combines the object code with other object files and libraries to generate an executable file. The linker also performs symbol resolution and relocation of addresses.
+The command to run the linker is ld or gcc. For example, to link the file example.o with the standard C library and generate the executable file example, you can use the command:
+
+Copy code
+gcc example.o -o example
+Note that these commands are for Unix-based systems such as Linux and macOS. On Windows, the commands may be slightly different, and the file extensions may be different as well. Additionally, some C compilers may combine several stages into a single command, or may have different options and behaviors. It is important to consult the documentation for your specific compiler to understand its behavior and usage.
+
+
+
+
