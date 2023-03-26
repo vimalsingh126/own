@@ -301,3 +301,95 @@ This document has outlined the functional and non-functional requirements for SS
 *********************************
 
 
+Software Requirements Specification (SRS) for TPM2_NV_DefineSpace
+
+Introduction
+The TPM2_NV_DefineSpace is a C program that defines an NV index in the TPM 2.0 device. This program uses the TSS2 software stack and TPM 2.0 specification.
+
+Functional Requirements
+2.1 Define an NV index
+The program should be able to define an NV index by setting the attributes, authorization policy, and data size.
+
+2.2 Set Attributes
+The program should be able to set the following attributes for an NV index:
+
+TPMA_NV_AUTHREAD: Read access requires authorization
+TPMA_NV_AUTHWRITE: Write access requires authorization
+TPMA_NV_OWNERWRITE: Owner can write
+TPMA_NV_OWNERREAD: Owner can read
+2.3 Set Authorization
+The program should be able to set the authorization for an NV index.
+
+Non-functional Requirements
+3.1 Portability
+The program should be portable across different operating systems and platforms.
+3.2 Security
+The program should be secure and protect sensitive information. Authorization should be required for reading and writing data from the NV index.
+
+System Requirements
+4.1 Hardware Requirements
+TPM 2.0 device
+4.2 Software Requirements
+
+TSS2 software stack
+TPM 2.0 specification
+User Interface
+The program does not have a user interface.
+
+Assumptions and Dependencies
+The program assumes that a TPM 2.0 device is available and that the TSS2 software stack is installed.
+
+References
+
+TCG TPM 2.0 Library Specification (Level 00 Revision 01.59), Part 3: Commands, Section 25: NV Define Space
+TCG TPM 2.0 Library Specification (Level 00 Revision 01.59), Part 2: Structures, Section 11: TPM2B_NV_PUBLIC Structure
+TCG TPM 2.0 Library Specification (Level 00 Revision 01.59), Part 2: Structures, Section 16: TPMA_NV Structure
+TCG TPM 2.0 Library Specification (Level 00 Revision 01.59), Part 2: Structures, Section 7: TPM2B_AUTH Structure
+
+
+
+
+******
+Software Requirements Specification (SRS) for the SSL server code:
+
+Introduction:
+The SSL server is a program that listens for incoming TCP connections and provides secure communication using the SSL/TLS protocol. This program uses the OpenSSL library to implement the SSL/TLS protocol.
+
+Functional Requirements:
+The SSL server must:
+
+Initialize the OpenSSL library.
+Create a server socket.
+Bind the server socket to an address and port.
+Listen for incoming connections.
+Accept incoming connections.
+Fork a child process to handle each incoming connection.
+Initialize the SSL connection for each child process.
+Load the server certificate and private key.
+Read and write data over the SSL connection.
+Shutdown the SSL connection and free resources.
+Non-Functional Requirements:
+The SSL server must:
+Support the TLSv1.2 protocol.
+Support up to 100 concurrent client connections.
+Handle errors and report them to the user.
+Use secure coding practices to prevent security vulnerabilities.
+Be compatible with Linux operating system.
+Be written in C programming language.
+Provide a command-line interface to start the server.
+User Interface:
+The SSL server provides a command-line interface to start the server. The user can specify the port number and the paths to the server certificate and private key files as command-line arguments.
+
+Performance Requirements:
+The SSL server must handle up to 100 concurrent client connections without degradation in performance. The server must respond to client requests in a timely manner.
+
+Security Requirements:
+The SSL server must use secure coding practices to prevent security vulnerabilities such as buffer overflows and injection attacks. The server must use SSL/TLS protocol to provide secure communication between client and server.
+
+Error Handling Requirements:
+The SSL server must handle errors and report them to the user. The server must log errors in a log file for debugging purposes.
+
+Assumptions and Dependencies:
+The SSL server assumes that the OpenSSL library is installed on the system. The server depends on the OpenSSL library to implement the SSL/TLS protocol. The server also depends on the Linux operating system to provide the socket API. The server assumes that the server certificate and private key files are present in the specified path.
+
+***
