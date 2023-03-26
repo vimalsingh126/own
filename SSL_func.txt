@@ -1,0 +1,130 @@
+SSL_CTX_new():
+SSL_CTX_new() is a function in the OpenSSL library that creates a new SSL_CTX object, which is used to configure SSL connections. An SSL_CTX object is essentially a configuration object that is used to specify which SSL/TLS protocol versions to use, which cipher suites to use, and other SSL-related options.
+
+Prototype:
+
+arduino
+Copy code
+SSL_CTX *SSL_CTX_new(const SSL_METHOD *method);
+Parameters:
+
+method: The SSL/TLS protocol version to use (e.g. TLSv1.2_client_method(), TLSv1_method(), etc.).
+Return value:
+
+If successful, returns a pointer to a new SSL_CTX object.
+If an error occurs, returns NULL.
+SSL_CTX_use_certificate_file():
+SSL_CTX_use_certificate_file() is a function in the OpenSSL library that loads a certificate into an SSL_CTX object from a file in PEM format. This function is used to load the server's own certificate, which is used to authenticate the server to clients.
+
+Prototype:
+
+arduino
+Copy code
+int SSL_CTX_use_certificate_file(SSL_CTX *ctx, const char *file, int type);
+Parameters:
+
+ctx: Pointer to an SSL_CTX object.
+file: Path to the certificate file in PEM format.
+type: Type of certificate file (e.g. SSL_FILETYPE_PEM).
+Return value:
+
+Returns 1 if the certificate was successfully loaded, 0 if the certificate could not be loaded, or -1 if an error occurred.
+SSL_CTX_use_PrivateKey_file():
+SSL_CTX_use_PrivateKey_file() is a function in the OpenSSL library that loads a private key into an SSL_CTX object from a file in PEM format. This function is used to load the server's private key, which is used to decrypt data that is sent to the server.
+
+Prototype:
+
+arduino
+Copy code
+int SSL_CTX_use_PrivateKey_file(SSL_CTX *ctx, const char *file, int type);
+Parameters:
+
+ctx: Pointer to an SSL_CTX object.
+file: Path to the private key file in PEM format.
+type: Type of private key file (e.g. SSL_FILETYPE_PEM).
+Return value:
+
+Returns 1 if the private key was successfully loaded, 0 if the private key could not be loaded, or -1 if an error occurred.
+SSL_CTX_load_verify_locations():
+SSL_CTX_load_verify_locations() is a function in the OpenSSL library that loads a set of trusted CA certificates into an SSL_CTX object. This function is used to specify which CA certificates the server should use to verify the authenticity of client certificates.
+
+Prototype:
+
+objectivec
+Copy code
+int SSL_CTX_load_verify_locations(SSL_CTX *ctx, const char *CAfile, const char *CApath);
+Parameters:
+
+ctx: Pointer to an SSL_CTX object.
+CAfile: Path to a file containing trusted CA certificates in PEM format.
+CApath: Path to a directory containing trusted CA certificates in PEM format.
+Return value:
+
+Returns 1 if the CA certificates were successfully loaded, or 0 if an error occurred.
+SSL_CTX_set_verify():
+SSL_CTX_set_verify() is a function in the OpenSSL library that sets the SSL verify mode and callback function for an SSL_CTX object. This function is used to specify how the server should verify client certificates.
+
+Prototype:
+
+arduino
+Copy code
+void SSL_CTX_set_verify(SSL_CTX *ctx, int mode, int (*verify_callback)(int, X509_STORE_CTX *));
+Parameters:
+
+ctx: Pointer to an SSL_CTX object.
+mode: SSL verify mode (e.g. SSL_VERIFY_PEER).
+verify_callback: Pointer to a callback function that is called during the SSL handshake to verify the client certificate.
+Return value:
+
+SSL_new():
+
+Creates a new SSL object that can be used to establish an SSL/TLS connection.
+Returns a pointer to the newly created SSL object or NULL if an error occurred.
+Syntax: SSL *SSL_new(SSL_CTX *ctx);
+SSL_set_fd():
+
+Associates a socket file descriptor with an SSL object.
+This sets up the SSL object to read and write data to the given file descriptor.
+Returns 1 on success, 0 otherwise.
+Syntax: int SSL_set_fd(SSL *ssl, int fd);
+SSL_connect():
+
+Initiates an SSL/TLS handshake with a server.
+The SSL/TLS handshake is a process where the client and server agree on encryption and authentication methods to use for the connection.
+Returns 1 on success, 0 on failure, and a negative number if an error occurred.
+Syntax: int SSL_connect(SSL *ssl);
+SSL_accept():
+
+Waits for an SSL/TLS handshake from a client.
+The SSL/TLS handshake is a process where the client and server agree on encryption and authentication methods to use for the connection.
+Returns 1 on success, 0 on failure, and a negative number if an error occurred.
+Syntax: int SSL_accept(SSL *ssl);
+SSL_read():
+
+Receives data over an SSL/TLS connection.
+Reads up to num bytes of data from the SSL/TLS connection into the buffer pointed to by buf.
+Returns the number of bytes read, 0 if the connection has been closed, and a negative number if an error occurred.
+Syntax: int SSL_read(SSL *ssl, void *buf, int num);
+SSL_write():
+
+Sends data over an SSL/TLS connection.
+Writes up to num bytes of data from the buffer pointed to by buf to the SSL/TLS connection.
+Returns the number of bytes written and a negative number if an error occurred.
+Syntax: int SSL_write(SSL *ssl, const void *buf, int num);
+SSL_shutdown():
+
+Shuts down an SSL/TLS connection.
+Sends a close_notify alert to the other end of the SSL/TLS connection, indicating that the connection is being terminated.
+Returns 1 on success, 0 on failure, and a negative number if an error occurred.
+Syntax: int SSL_shutdown(SSL *ssl);
+SSL_free():
+
+Frees an SSL object and releases any associated memory.
+Syntax: void SSL_free(SSL *ssl);
+SSL_CTX_free():
+
+Frees an SSL context and releases any associated memory.
+Syntax: void SSL_CTX_free(SSL_CTX *ctx);
+
+
+
