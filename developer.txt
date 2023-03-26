@@ -1,0 +1,47 @@
+Development Document for OpenSSL AES Encryption
+
+Introduction:
+OpenSSL is a widely used open source cryptographic library that provides various cryptographic algorithms and protocols, including AES encryption. In this development document, we will be discussing the steps involved in implementing AES encryption using OpenSSL in C programming language.
+
+Requirements:
+To implement OpenSSL AES encryption, we need the following requirements:
+
+OpenSSL library installed on the system.
+A C compiler installed on the system.
+Basic knowledge of C programming language and cryptography concepts.
+Steps:
+The following steps are involved in implementing OpenSSL AES encryption:
+
+Include header files:
+The first step is to include the required header files in the C program. For AES encryption, we need to include the following header files:
+
+
+#include <openssl/aes.h>
+#include <openssl/rand.h>
+Declare variables:
+Next, we need to declare the required variables, including the key and initialization vector (IV) for AES encryption. The key and IV should be of appropriate length (128 bits, 192 bits or 256 bits) for AES encryption. We can use the OpenSSL random generator to generate a random key and IV. We also need to declare the plaintext and ciphertext buffers.
+
+unsigned char key[AES_BLOCK_SIZE], iv[AES_BLOCK_SIZE];
+unsigned char plaintext[256];
+unsigned char ciphertext[256];
+Generate key and IV:
+We can use the OpenSSL random generator to generate a random key and IV as follows:
+scss
+RAND_bytes(key, sizeof(key));
+RAND_bytes(iv, sizeof(iv));
+Initialize AES context:
+Next, we need to initialize the AES context with the key and IV. We can do this using the following code:
+
+AES_KEY aes_key;
+AES_set_encrypt_key(key, 256, &aes_key);
+Encrypt plaintext:
+Now we are ready to encrypt the plaintext using AES encryption. We can do this using the following code:
+
+AES_cbc_encrypt(plaintext, ciphertext, sizeof(plaintext), &aes_key, iv, AES_ENCRYPT);
+Store encrypted data:
+The encrypted data (ciphertext) can be stored in a file or sent over a network connection.
+Conclusion:
+In this development document, we have discussed the steps involved in implementing OpenSSL AES encryption in C programming language. By following these steps, we can easily encrypt data using AES encryption and ensure its security.
+
+
+
