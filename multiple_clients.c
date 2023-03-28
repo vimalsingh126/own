@@ -100,3 +100,25 @@ int main() {
 
     return 0;
 }
+
+***************************************************
+#include <sys/types.h>
+#include <signal.h>
+#include <stdio.h>
+
+int main() {
+    pid_t pid = getpid();
+    pid_t pgid = getpgid(pid);
+
+    printf("Parent process ID: %d\n", pid);
+    printf("Parent process group ID: %d\n", pgid);
+
+    // Kill all child processes (including grandchildren)
+    if (killpg(pgid, SIGKILL) == -1) {
+        perror("killpg");
+        exit(1);
+    }
+
+    return 0;
+}
+
