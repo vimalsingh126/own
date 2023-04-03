@@ -1,8 +1,3 @@
-/*	
-Name -		 Vimal Singh
-Batch - ECEP 22002
-*/
-
 #include <stdio.h>
 #include <ctype.h>
 #include <stdlib.h>
