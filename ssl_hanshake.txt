@@ -1,0 +1,29 @@
+In SSL/TLS communication, the server presents its key and certificate to the client during the SSL/TLS handshake process. The key and certificate are used for authentication and to establish a secure connection. Here's how the server's key and certificate are shared with the client:
+
+Server's Private Key and Certificate Generation:
+
+The server generates a key pair consisting of a private key and a corresponding public key.
+The server's private key should be securely stored and kept confidential.
+Certificate Authority (CA) Verification (Optional):
+
+The server's public key is included in a digital certificate.
+The certificate is usually issued by a trusted Certificate Authority (CA) that verifies the server's identity.
+The CA's digital signature ensures the authenticity of the certificate.
+Server Hello:
+
+During the SSL/TLS handshake, the server sends a Server Hello message to the client.
+The Server Hello message includes the server's digital certificate, which contains the server's public key and other relevant information.
+The client receives the certificate and performs various checks, including verifying the certificate's authenticity and checking if it's issued by a trusted CA.
+Public Key Encryption:
+
+If the client accepts the server's certificate, it extracts the server's public key from the certificate.
+The client then generates a symmetric session key (used for encryption during the session) and encrypts it using the server's public key.
+The encrypted session key is sent back to the server.
+Private Key Decryption:
+
+The server receives the encrypted session key from the client.
+The server's private key is used to decrypt the encrypted session key, recovering the shared symmetric session key.
+Both the client and server now possess the same session key, which will be used for encryption and decryption during the SSL/TLS session.
+By presenting its digital certificate during the handshake process, the server provides the necessary information and proof of its identity to the client. The client verifies the server's certificate to ensure the authenticity of the server and establishes a secure connection using the shared symmetric session key.
+
+It's important to properly secure the server's private key and ensure the validity and trustworthiness of the server's certificate issued by a trusted CA to establish a secure SSL/TLS connection
