@@ -26,7 +26,7 @@ int sha256_file(const char* filename, unsigned char* hash) {
 }
 
 int main() {
-    const char* filename = "example.txt";
+    const char* filename = "hello.c";
     unsigned char hash[SHA256_DIGEST_LENGTH];
 
     if (sha256_file(filename, hash) == 0) {
@@ -40,22 +40,4 @@ int main() {
     }
 
     return 0;
-}
-
-
-
-
-#include <stdlib.h>
-#include <string.h>
-
-// Securely delete a pointer
-void secure_delete(void* ptr, size_t size) {
-    if (ptr == NULL) return;
-
-    volatile char* vptr = (volatile char*)ptr;
-    while (size--) {
-        *vptr++ = rand() & 0xFF;
-    }
-    
-    free(ptr);
 }
