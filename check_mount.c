@@ -54,7 +54,7 @@ int main() {
         printf("Directory %s is already mounted on tmpfs\n", directory);
     } else {
         // Mount the directory on tmpfs
-        if (mount("tmpfs", directory, "tmpfs", 0, "size=1048576") == -1) {
+        if (mount("tmpfs", directory, "tmpfs", 0, "size=1G") == -1) {
             perror("mount failed");
             return 1;
         }
